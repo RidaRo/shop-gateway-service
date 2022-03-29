@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "keeper.service.url",
+      "type": "java.lang.String",
+      "description": "Description for keeper.service.url."
+    },
+    {
+      "name": "customer.service.url",
+      "type": "java.lang.String",
+      "description": "Description for customer.service.url."
+    }
+  ] }
