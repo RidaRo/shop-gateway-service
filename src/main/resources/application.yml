@@ -1,0 +1,40 @@
+customer:
+    service:
+        url: http://localhost:8082
+keeper:
+    service:
+        url: http://localhost:8081
+
+management:
+    endpoints:
+        web:
+            exposure:
+                include: '*'
+server:
+    port: 8083
+
+spring:
+    main:
+        allow-bean-definition-overriding: true
+    cloud:
+        gateway:
+            default-filters:
+                - TokenRelay
+            routes:
+                - id: product-resource-server
+                  uri: http://localhost:8081
+                  predicates:
+                      - Path=/items/**
+    security:
+        oauth2:
+            client:
+                provider:
+                    keycloak:
+                        issuer-uri: http://localhost:8080/auth/realms/shop-gateway-service
+                registration:
+                    gateway-service:
+                        authorization-grant-type: authorization_code
+                        client-id: spring-gateway-client
+                        client-secret: b53fd912-cd6c-4300-ba4b-a471081ec1cf
+                        provider: keycloak
+                        redirect-uri: '{baseUrl}/login/oauth2/code/keycloak'
